@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #   Use this script to test if a given record exists 
-
 cmdname=$(basename $0)
 
 echoerr() { if [[ $QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
@@ -75,9 +74,14 @@ wait_for_wrapper()
     return $RESULT
 }
 
+#set dns name from command line if it isn't set as an environment
+if [ -z "$DNS_NAME" ]; then
+	DNS_NAME=$1
+	shift 1
+else
+	shift 1
+fi
 # process arguments
-DNS_NAME=$1
-shift 1
 while [[ $# -gt 0 ]]
 do
     case "$1" in
