@@ -18,22 +18,6 @@ USAGE
     exit 1
 }
 
-timeout() {
-    time=$1
-    shift
-
-    # start the command in a subshell to avoid problem with pipes
-    # (spawn accepts one command)
-    command="/bin/sh -c \"$@\""
-
-    expect -c "set echo \"-noecho\"; set timeout $time; spawn -noecho $command; expect timeout { exit 1 } eof { exit 0 }"    
-
-    if [ $? = 1 ] ; then
-       return 1 
-    fi
-
-}
-
 wait_for()
 {
     if [[ $TIMEOUT -gt 0 ]]; then
