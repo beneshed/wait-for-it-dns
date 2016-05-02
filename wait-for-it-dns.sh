@@ -29,6 +29,7 @@ wait_for()
     while :
     do
         (host $DNS_NAME) >/dev/null 2>&1
+	host $DNS_NAME
         result=$?
         if [[ $result -eq 0 ]]; then
             end_ts=$(date +%s)
